@@ -1,2 +1,2 @@
 # taller-redes-aws
-Trabajo practico final para la materia Taller de Redes - UTN FRSF 2022
+Trabajo Práctico Final para la materia Taller de Redes - UTN FRSF 2022
