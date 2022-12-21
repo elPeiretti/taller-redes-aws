@@ -1,0 +1,20 @@
+
+upstream backend {
+    #backend1
+    server 10.0.0.4;
+    #backend2
+    server 10.0.0.13;
+}
+
+# Default server configuration
+#
+server {
+    listen 80;
+    listen [::]:80;
+    access_log /var/log/nginx/reverse-access.log;
+    error_log /var/log/nginx/reverse-error.log;
+
+    location / {
+        proxy_pass http://backend;
+    }
+}

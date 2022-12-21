@@ -7,4 +7,9 @@ sudo apt install nginx
 /etc/init.d/nginx start
 /etc/init.d/nginx status
 
-sudo vi /etc/nginx/sites-enabled/default
+#configuracion del balanceador
+sudo rm /etc/nginx/sites-enabled/default
+sudo cp ./backend_default /etc/nginx/sites-enabled/
+
+#reiniciar nginx
+systemctl restart nginx
