@@ -1,8 +1,6 @@
 #!/bin/sh
 
-## instalar y arrancar nginx
+## instalar y correr servidor apache
 sudo apt-get update
-sudo apt install nginx
-
-/etc/init.d/nginx start
-/etc/init.d/nginx status
+sudo apt install apache2
+systemctl start apache2
