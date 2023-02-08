@@ -12,7 +12,7 @@ apt install nginx
 
 #configuracion del balanceador
 rm /etc/nginx/sites-enabled/default
-cp ./balanceador_de_cargadefault /etc/nginx/sites-enabled/default
+cp ./balanceador_de_carga_default /etc/nginx/sites-enabled/default
 
 #reiniciar nginx
 systemctl restart nginx
