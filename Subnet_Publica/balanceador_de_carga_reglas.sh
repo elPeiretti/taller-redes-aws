@@ -9,14 +9,14 @@ iptables -F FORWARD
 # Reglas para poder conectarse por ssh si se necesita
 # Se permite desde cualquier IP porque Amazon la cambia automáticamente
 
-iptables -A INPUT -i eth0 -p tcp --sport 1024:65535 --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
-iptables -A OUTPUT -o eth0 -p tcp --sport 22 --dport 1024:65535 -m state --state ESTABLISHED -j ACCEPT
+iptables -A INPUT -i eth0 -s 0.0.0.0/0 -d 10.0.0.14 -p tcp --sport 1024:65535 --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -o eth0 -s 10.0.0.14 -d 0.0.0.0 -p tcp --sport 22 --dport 1024:65535 -m state --state ESTABLISHED -j ACCEPT
 
 # Reglas por defecto
 
-iptables -P INPUT ACCEPT
-iptables -P OUTPUT ACCEPT
-iptables -P FORWARD ACCEPT
+iptables -P INPUT DROP
+iptables -P OUTPUT DROP
+iptables -P FORWARD DROP
 
 # Reglas para permitir el trafico http y https desde afuera
 
