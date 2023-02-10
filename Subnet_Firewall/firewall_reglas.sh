@@ -8,8 +8,8 @@ iptables -F FORWARD
 
 # Reglas para poder conectarse por ssh si se necesita
 
-iptables -A INPUT -s 0.0.0.0/0 -d 10.0.0.106/32 -p tcp --sport 1024:65535 --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
-iptables -A OUTPUT -s 10.0.0.106/32 -d 0.0.0.0/0 -p tcp --sport 22 --dport 1024:65535 -m state --state ESTABLISHED -j ACCEPT
+iptables -A INPUT -s 0.0.0.0/0 -d 10.0.0.100/32 -p tcp --sport 1024:65535 --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -s 10.0.0.100/32 -d 0.0.0.0/0 -p tcp --sport 22 --dport 1024:65535 -m state --state ESTABLISHED -j ACCEPT
 
 # Reglas por defecto
 
