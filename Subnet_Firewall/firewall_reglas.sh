@@ -19,8 +19,8 @@ iptables -P FORWARD DROP
 
 # Reglas para el servidor web público (NAT)
 
-iptables -t nat -A PREROUTING -d 10.0.0.106 -i eth0 -j DNAT --to-destination 10.0.0.12
-iptables -t nat -A POSTROUTING -s 10.0.0.12 -o eth0 -j SNAT --to-source 10.0.0.106
+iptables -t nat -A PREROUTING -p tcp --dport 80 -d 10.0.0.106 -i eth0 -j DNAT --to-destination 10.0.0.12
+iptables -t nat -A POSTROUTING -p tcp --sport 80 -s 10.0.0.12 -o eth0 -j SNAT --to-source 10.0.0.106
 
 
 
