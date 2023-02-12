@@ -3,14 +3,14 @@
 ## instalar y correr servidor apache
 sudo apt-get update
 sudo apt install apache2
-systemctl start apache2
+sudo systemctl start apache2
 
 ## cambiar el html
-rm /var/www/html/index.html
-cp ./servidor_privado_index.html /var/www/html/index.html
+sudo rm /var/www/html/index.html
+sudo cp ./servidor_privado_index.html /var/www/html/index.html
 
 ## reiniciar apache2
-systemctl restart apache2
+sudo systemctl restart apache2
 
 ## instalar wireguard
 sudo apt install wireguard
