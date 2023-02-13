@@ -1,14 +1,11 @@
 #!/bin/sh
 
-# super usuario
-sudo su
-
 ## instalar mysql
-apt-get update
-apt-get install mysql-server
+sudo apt-get update
+sudo apt-get install mysql-server
 
 # iniciar la base de datos
-systemctl start mysql.service
+sudo systemctl start mysql.service
 
 # comprobar que todo esté andando bien
-systemctl status mysql.service
+sudo systemctl status mysql.service
