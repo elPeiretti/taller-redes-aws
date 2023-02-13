@@ -1,9 +1,9 @@
 
 upstream backend {
     #backend1
-    server 10.0.0.4;
+    server 10.0.0.5;
     #backend2
-    server 10.0.0.13;
+    server 10.0.0.8;
 }
 
 # Default server configuration
