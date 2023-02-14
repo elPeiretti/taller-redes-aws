@@ -17,9 +17,6 @@ wg pubkey < tp_private_key > tp_public_key
 # crear archivo de configuracion
 nano tr0.conf
 
-exit
-sudo su
-
 chmod 600 tp_private_key tp_public_key tr0.conf
 
 ## levantar wireguard
