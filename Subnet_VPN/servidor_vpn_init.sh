@@ -14,6 +14,7 @@ wg genkey > tp_private_key
 # crear clave publica
 wg pubkey < tp_private_key > tp_public_key
 
+sudo su
 # crear archivo de configuracion
 nano tr0.conf
 
