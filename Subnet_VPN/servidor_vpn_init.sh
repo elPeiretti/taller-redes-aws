@@ -1,7 +1,5 @@
 #!/bin/sh
 
-sudo su
-
 ## instalar wireguard
 apt-get update
 apt install wireguard
