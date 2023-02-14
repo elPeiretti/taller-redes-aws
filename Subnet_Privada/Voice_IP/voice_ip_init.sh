@@ -10,5 +10,5 @@ sudo asterisk -rvvvv
 sudo sip reload
 sudo dialplan reload
 
-## reiniciar apache2
-sudo systemctl restart apache2
+# reiniciar asterisk
+sudo systemctl restart asterisk
