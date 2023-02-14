@@ -1,11 +1,10 @@
 #!/bin/sh
 
-## instalar wireguard
-sudo apt-get update
-sudo apt install wireguard
-
-# acceder a la carpeta /etc/wireguard
 sudo su
+
+## instalar wireguard
+apt-get update
+apt install wireguard
 
 ## generar claves
 cd /etc/wireguard
@@ -14,7 +13,6 @@ wg genkey > tp_private_key
 # crear clave publica
 wg pubkey < tp_private_key > tp_public_key
 
-sudo su
 # crear archivo de configuracion
 nano tr0.conf
 
