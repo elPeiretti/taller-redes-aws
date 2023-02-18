@@ -17,5 +17,4 @@ iptables -t nat -F POSTROUTING
 #iptables -P FORWARD DROP
 
 # Reglas de nateo
-
 iptables -t nat -A POSTROUTING -s 10.0.100.0/24 -o eth0 -j SNAT --to-source 10.0.0.54
