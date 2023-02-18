@@ -42,6 +42,10 @@ iptables -A FORWARD -p tcp -s 10.0.0.29 -d 0.0.0.0/0 --sport 1024:65535 --dport 
 iptables -A FORWARD -p udp -s 0.0.0.0/0 -d 10.0.0.54/32 --sport 1024:65535 --dport 51820 -j ACCEPT 
 iptables -A FORWARD -p udp -s 10.0.0.54 -d 0.0.0.0/0 --sport 51820 --dport 1024:65535 -j ACCEPT 
 
+# Reglas loopback
+iptables -A INPUT -i lo -j ACCEPT
+iptables -A OUTPUT -o lo -j ACCEPT
+
 # Reglas por defecto DROP
 iptables -P INPUT DROP
 iptables -P OUTPUT DROP

@@ -32,6 +32,10 @@ iptables -A OUTPUT -s 10.0.0.7/32 -d 10.0.0.8/32 -p tcp --sport 1024:65535 --dpo
 iptables -A INPUT -s 10.0.0.8/32 -d 10.0.0.7/32 -p tcp --sport 443 --dport 1024:65535 -m state --state ESTABLISHED -j ACCEPT
 iptables -A OUTPUT -s 10.0.0.7/32 -d 10.0.0.8/32 -p tcp --sport 1024:65535 --dport 443 -m state --state NEW,ESTABLISHED -j ACCEPT
 
+# Reglas loopback
+iptables -A INPUT -i lo -j ACCEPT
+iptables -A OUTPUT -o lo -j ACCEPT
+
 # Reglas por defecto
 iptables -P INPUT DROP
 iptables -P OUTPUT DROP
