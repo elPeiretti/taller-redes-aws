@@ -14,9 +14,9 @@ iptables -t nat -F POSTROUTING
 iptables -A INPUT -p tcp -s 10.0.0.54/32 -d 10.0.0.24/32 --sport 1024:65535 --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
 iptables -A OUTPUT -p tcp -s 10.0.0.24/32 -d 10.0.0.54/32 --sport 22 --dport 1024:65535 -m state --state ESTABLISHED -j ACCEPT
 
-# Reglas para conectarse con el servidor VPN
-iptables -A INPUT -p tcp -s 10.0.0.54/32 -d 10.0.0.24/32 --sport 1024:65535 --dport 5060 -m state --state NEW,ESTABLISHED -j ACCEPT
-iptables -A OUTPUT -p tcp -s 10.0.0.24/32 -d 10.0.0.54/32 --sport 5060 --dport 1024:65535 -m state --state ESTABLISHED -j ACCEPT
+# Reglas para conectarse con el servidor VPN (UDP)
+iptables -A INPUT -p udp -s 10.0.0.54/32 -d 10.0.0.24/32 --sport 1024:65535 --dport 5060 -j ACCEPT
+iptables -A OUTPUT -p udp -s 10.0.0.24/32 -d 10.0.0.54/32 --sport 5060 --dport 1024:65535 -j ACCEPT
 
 # Reglas loopback
 iptables -A INPUT -i lo -j ACCEPT
