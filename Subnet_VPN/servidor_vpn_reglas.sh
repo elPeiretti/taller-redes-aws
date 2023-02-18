@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # Borrar todas las reglas
-
 iptables -P INPUT ACCEPT
 iptables -P OUTPUT ACCEPT
 iptables -P FORWARD ACCEPT
