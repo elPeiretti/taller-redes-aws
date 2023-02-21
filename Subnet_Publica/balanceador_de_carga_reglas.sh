@@ -10,9 +10,17 @@ iptables -F FORWARD
 iptables -t nat -F PREROUTING
 iptables -t nat -F POSTROUTING
 
-# Reglas para poder conectarse por ssh si se necesita
-iptables -A INPUT -s 0.0.0.0/0 -d 10.0.0.7/32 -p tcp --sport 1024:65535 --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
-iptables -A OUTPUT -s 10.0.0.7/32 -d 0.0.0.0/0 -p tcp --sport 22 --dport 1024:65535 -m state --state ESTABLISHED -j ACCEPT
+# Reglas para poder conectarse desde el firewall por ssh si se necesita
+iptables -A INPUT -s 10.0.0.38/32 -d 10.0.0.7/32 -p tcp --sport 1024:65535 --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -s 10.0.0.7/32 -d 10.0.0.38/32 -p tcp --sport 22 --dport 1024:65535 -m state --state ESTABLISHED -j ACCEPT
+
+# Reglas para poder conectarse por ssh al Backend1
+iptables -A INPUT -s 10.0.0.5/32 -d 10.0.0.7/32 -p tcp --sport 22 --dport 1024:65535 -m state --state ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -s 10.0.0.7/32 -d 10.0.0.5/32 -p tcp --sport 1024:65535 --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
+
+# Reglas para poder conectarse por ssh al Backend2
+iptables -A INPUT -s 10.0.0.8/32 -d 10.0.0.7/32 -p tcp --sport 22 --dport 1024:65535 -m state --state ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -s 10.0.0.7/32 -d 10.0.0.8/32 -p tcp --sport 1024:65535 --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
 
 # Reglas para permitir el trafico http y https desde/hacia afuera
 iptables -A INPUT -s 0.0.0.0/0 -d 10.0.0.7/32 -p tcp --sport 1024:65535 --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT
