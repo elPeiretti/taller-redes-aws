@@ -14,9 +14,13 @@ iptables -t nat -F POSTROUTING
 iptables -A INPUT -s 0.0.0.0/0 -d 10.0.0.38/32 -p tcp --sport 1024:65535 --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
 iptables -A OUTPUT -s 10.0.0.38/32 -d 0.0.0.0/0 -p tcp --sport 22 --dport 1024:65535 -m state --state ESTABLISHED -j ACCEPT
 
-# Reglas para ssh para conectarse al resto de las instancias desde el firewall
-iptables -A INPUT -p tcp -s 10.0.0.0/24 -d 10.0.0.38/32 --sport 22 --dport 1024:65535 -m state --state ESTABLISHED -j ACCEPT
-iptables -A OUTPUT -p tcp -s 10.0.0.38/32 -d 10.0.0.0/24 --sport 1024:65535 --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
+# Reglas para ssh para conectarse a la Subnet_Publica desde el firewall
+iptables -A INPUT -p tcp -s 10.0.0.0/28 -d 10.0.0.38/32 --sport 22 --dport 1024:65535 -m state --state ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -p tcp -s 10.0.0.38/32 -d 10.0.0.0/28 --sport 1024:65535 --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
+
+# Reglas para ssh para conectarse al servidor VPN desde el firewall
+iptables -A INPUT -p tcp -s 10.0.0.54/32 -d 10.0.0.38/32 --sport 22 --dport 1024:65535 -m state --state ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -p tcp -s 10.0.0.38/32 -d 10.0.0.54/32 --sport 1024:65535 --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
 
 #### Reglas de NAT
 # Reglas para el servidor web público
@@ -33,6 +37,8 @@ iptables -t nat -A POSTROUTING -p udp --sport 51820 -s 10.0.0.54 -o eth0 -j SNAT
 # Reglas para el servidor web público
 iptables -A FORWARD -p tcp -s 0.0.0.0/0 -d 10.0.0.7/32 --sport 1024:65535 --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT 
 iptables -A FORWARD -p tcp -s 10.0.0.7/32 -d 0.0.0.0/0 --sport 80 --dport 1024:65535 -m state --state ESTABLISHED -j ACCEPT 
+iptables -A FORWARD -p tcp -s 0.0.0.0/0 -d 10.0.0.7/32 --sport 1024:65535 --dport 443 -m state --state NEW,ESTABLISHED -j ACCEPT 
+iptables -A FORWARD -p tcp -s 10.0.0.7/32 -d 0.0.0.0/0 --sport 443 --dport 1024:65535 -m state --state ESTABLISHED -j ACCEPT 
 # Reglas para el proxy
 iptables -A FORWARD -p tcp -s 0.0.0.0/0 -d 10.0.0.29/32 --sport 80 --dport 1024:65535 -m state --state ESTABLISHED -j ACCEPT 
 iptables -A FORWARD -p tcp -s 10.0.0.29/32 -d 0.0.0.0/0 --sport 1024:65535 --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT 
