@@ -22,6 +22,10 @@ iptables -A OUTPUT -p udp -s 10.0.0.24/32 -d 10.0.0.54/32 --sport 5060 --dport 1
 iptables -A INPUT -p udp -s 10.0.0.2/32 --sport 53 -j ACCEPT
 iptables -A OUTPUT -p udp -d 10.0.0.2/32 --dport 53 -j ACCEPT
 
+# Reglas para hablar y escuchar
+iptables -A INPUT -p udp -s 10.0.0.54/32 -d 10.0.0.24/32 --sport 1024:65535 --dport 10000:20000 -j ACCEPT
+iptables -A OUTPUT -p udp -s 10.0.0.24/32 -d 10.0.0.54/32 --sport 10000:20000 --dport 1024:65535 -j ACCEPT
+
 # Reglas loopback
 iptables -A INPUT -i lo -j ACCEPT
 iptables -A OUTPUT -o lo -j ACCEPT

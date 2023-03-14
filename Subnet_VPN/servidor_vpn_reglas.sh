@@ -32,6 +32,8 @@ iptables -A FORWARD -p tcp -s 10.0.0.29/32 -d 10.0.100.0/24 --sport 3128 --dport
 # Reglas para el VO-IP
 iptables -A FORWARD -p udp -s 10.0.100.0/24 -d 10.0.0.24/32 --sport 1024:65535 --dport 5060 -j ACCEPT 
 iptables -A FORWARD -p udp -s 10.0.0.24/32 -d 10.0.100.0/24 --sport 5060 --dport 1024:65535 -j ACCEPT 
+iptables -A FORWARD -p udp -s 10.0.100.0/24 -d 10.0.0.24/32 --sport 1024:65535 --dport 10000:20000 -j ACCEPT
+iptables -A FORWARD -p udp -s 10.0.0.24/32 -d 10.0.100.0/24 --sport 10000:20000 --dport 1024:65535 -j ACCEPT
 # Reglas para el servidor privado
 iptables -A FORWARD -p tcp -s 10.0.100.0/24 -d 10.0.0.28/32 --sport 1024:65535 --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT 
 iptables -A FORWARD -p tcp -s 10.0.0.28/32 -d 10.0.100.0/24 --sport 80 --dport 1024:65535 -m state --state ESTABLISHED -j ACCEPT 
